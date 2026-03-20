@@ -7,3 +7,16 @@ If using the esp32 make sure the ip,cam = camera_server..., and image rotation l
 
 If using the laptop camera, make sure it is the opposite
 
+# todo
+ - [x] Get the images from esp32
+ - [x] Implement facial recognition with the face_recognition library
+ - [x] Add text to speech to read out names
+ - [x] Add a way to walk the directory to add reference faces and people
+ - [x] Clip unknown faces and add them to a directory
+ - [x] Decreas video quality to increase streaming speed
+ - [x] Add multithreading for facial recognition
+ - [ ] Use mediapipe's more advanced facial detection
+ - [ ] Add ui
+ - [ ] Build bone conduction earpiece
+ - [ ] Build nametag houses
+ - [ ] Port to phone
