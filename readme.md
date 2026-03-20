@@ -13,7 +13,7 @@ If using the laptop camera, make sure it is the opposite
  - [x] Add text to speech to read out names
  - [x] Add a way to walk the directory to add reference faces and people
  - [x] Clip unknown faces and add them to a directory
- - [x] Decreas video quality to increase streaming speed
+ - [x] Decrease video quality to increase streaming speed
  - [x] Add multithreading for facial recognition
  - [ ] Use mediapipe's more advanced facial detection
  - [ ] Add ui
