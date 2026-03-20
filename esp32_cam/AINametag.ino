@@ -9,8 +9,8 @@
 // ===========================
 // Enter your WiFi credentials
 // ===========================
-const char *ssid = "SETUP-5A87";
-const char *password = "corral3010drink";
+const char *ssid = "*********";
+const char *password = "*********";
 
 void startCameraServer();
 void setupLedFlash();
