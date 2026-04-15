@@ -3,17 +3,17 @@ import time
 import cv2
 import os
 import pyttsx3
-
+import threading
 tts = pyttsx3.init()
 
 
-
-ip = "192.168.0.65" #esp32 cam ip address
+face_removal_frames = 300
+ip = "172.20.10.12" #esp32 cam ip address
 cam = camera_server.camera("http://" + ip + ":81/stream")
 # cam = laptop_camera.camera(0)
-time.sleep(1) 
+time.sleep(0.5) 
 
-scanner = face_search.face_scanner(downscale=1)
+scanner = face_search.face_scanner(downscale=1 )
 # Load reference faces
 for directory in os.listdir("faces"):
     if directory == "unsorted":
@@ -33,11 +33,13 @@ def face_recognition_loop():
             faces_in_frame.append(name)
             print(f"{name} detected!")
             if "Unsorted" not in name:
-                tts.say(name + " detected")
-                tts.runAndWait() 
+                tts.say(name)
+                threading.Thread(target=tts.runAndWait).start() # run in separate thread so it doesn't block the main loop
+                # tts.runAndWait() 
         elif name == "Unknown":
             tts.say("Unknown person detected")
-            tts.runAndWait()
+            threading.Thread(target=tts.runAndWait).start() # run in separate thread so it doesn't block the main loop
+            # tts.runAndWait()
             print("Unknown face detected.")
             scanner.add_unknown(image, location)
             
@@ -46,19 +48,20 @@ def face_recognition_loop():
     for face in faces_in_frame[:]:
         if face not in names:
             face_last_seen[face] = face_last_seen.get(face, 0) + 1
-            if face_last_seen[face] > 200:
+            if face_last_seen[face] > face_removal_frames:
                 print(f"{face} left the frame.")
                 faces_in_frame.remove(face)
                 del face_last_seen[face]
 
 while True:
     # print("getting image")
-    image = cam.get_image()
+    image = cam.get_image() 
     if image is None: continue
 
-    image = cv2.rotate(image,cv2.ROTATE_90_CLOCKWISE) #for esp32 cam orientation
+    image = cv2.rotate(image,cv2.ROTATE_180) #for esp32 cam orientation
     cv2.imshow("graydon's capstone project", image)
 
+    # threading.Thread(target=face_recognition_loop).start() # run face recognition in separate thread so it doesn't block the main loop
     face_recognition_loop()
 
     

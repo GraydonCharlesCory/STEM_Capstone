@@ -18,5 +18,5 @@ If using the laptop camera, make sure it is the opposite
  - [ ] Use mediapipe's more advanced facial detection
  - [ ] Add ui
  - [ ] Build bone conduction earpiece
- - [ ] Build nametag houses
+ - [x] Build nametag houses
  - [ ] Port to phone

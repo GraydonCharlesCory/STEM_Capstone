@@ -5,8 +5,8 @@ import os
 import mediapipe as mp
 
 class face_scanner:
-    def __init__(self,downscale = 2):
-        self.known_encodings = np.empty((0, 128)) #max of 128 face encodings, can add more later
+    def __init__(self,downscale = 2, max_faces=128):
+        self.known_encodings = np.empty((0, max_faces)) #max of 128 face encodings, can add more later
         self.known_names = np.array([])
         self.scale_factor = downscale
 
